@@ -1,0 +1,8 @@
+.postPage__content > a {
+  text-decoration: underline;
+  color: #333;
+}
+
+.postPage__content > div > *:not(p:empty) + *:not(p:empty) {
+  margin-top: .5em;
+}
