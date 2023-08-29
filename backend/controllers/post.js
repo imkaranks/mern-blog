@@ -31,14 +31,23 @@ const createPost = catchAsyncError(async(req, res, next) => {
 });
 
 const getAllPosts = catchAsyncError(async (req, res, next) => {
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 6;
+  const skip = (page - 1) * limit;
+
+  const postsCount = await Post.countDocuments();
+
   const posts = await Post.find()
     .populate('author', ['username'])
     .sort({ createdAt: -1 })
-    .limit(20);
+    .skip(skip)
+    .limit(limit);
 
   res.status(200).json({
     success: true,
-    posts
+    posts,
+    resultsPerPage: limit,
+    postsCount
   });
 });
 

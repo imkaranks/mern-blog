@@ -3,6 +3,18 @@
   color: #333;
 }
 
-.postPage__content > div > *:not(p:empty) + *:not(p:empty) {
+.postPage__content > div > * + * {
   margin-top: .5em;
+}
+.postPage__content h1 {
+  @apply text-2xl font-semibold;
+}
+.postPage__content h2 {
+  @apply text-xl font-semibold leading-tight;
+}
+.postPage__content h3 {
+  @apply text-lg font-semibold leading-tight;
+}
+.postPage__content h4 {
+  @apply text-base font-semibold leading-tight;
 }

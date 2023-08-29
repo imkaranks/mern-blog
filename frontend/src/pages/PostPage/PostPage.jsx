@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { formatISO9075 } from 'date-fns'
+import { format } from 'date-fns'
 import { UserContext } from '../../context/UserContext'
+import Loader from '../../components/Loader';
 import './PostPage.css';
 
 function PostPage() {
@@ -17,7 +18,7 @@ function PostPage() {
   }, []);
   
   if (!post) {
-    return <h1>Loading...</h1>
+    return <Loader />;
   }
   return (
     <article className='postPage | flex flex-col gap-5 mt-5 mb-7'>
@@ -29,10 +30,10 @@ function PostPage() {
         />
       </div>
       <div className='postPage__content'>
-        <h1 className='postPage__title | m-0 text-3xl'>{post.title}</h1>
+        <h1 className='postPage__title | m-0 !text-3xl font-semibold'>{post.title}</h1>
         <p className='postPage__author my-1.5 text-xs text-[#888] font-bold flex gap-3'>
-          <cite className='text-[#333]'>{post.author.username}</cite>
-          <time>{formatISO9075(new Date(post.createdAt))}</time>
+          <cite className='text-[#333] not-italic'>{post.author.username}</cite>
+          <time>{format(new Date(post.createdAt), 'PPP')}</time>
         </p>
         {
           userInfo.id === post.author._id && (
@@ -45,7 +46,5 @@ function PostPage() {
     </article>
   )
 }
-
-// 2:39:00
 
 export default PostPage
